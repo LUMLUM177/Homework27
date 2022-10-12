@@ -44,7 +44,6 @@ public class Data {
             throw new WrongPasswordException("В пароле содержится запрещённый символ.");
         }
         if (!checkString(confirmPassword)) {
-            ;
             throw new WrongPasswordException("В подтверждении пароля содержится запрещённый символ.");
         }
         if (!password.equals(confirmPassword)) {
@@ -58,18 +57,18 @@ public class Data {
         boolean verify = true;
         int code;
         if (text.length() < 1 || text.length() > 20) {
-            verify = false;
-        } else {
-            for (int i = 0; i < text.length(); i++) {
-                code = (int) text.charAt(i);
-                if ((code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <= 122) || code == 95) {
-                    verify = true;
-                } else {
-                    verify = false;
-                    break;
-                }
+            return false;
+        }
+        for (int i = 0; i < text.length(); i++) {
+            code = (int) text.charAt(i);
+            if ((code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <= 122) || code == 95) {
+                verify = true;
+            } else {
+                verify = false;
+                break;
             }
         }
+
         return verify;
     }
 }
