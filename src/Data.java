@@ -24,57 +24,33 @@ public class Data {
         return confirmPassword;
     }
 
-    public static boolean checkLoginAndPassword(String login, String password, String confirmPassword) {
-        boolean checking;
+    public static boolean checkLoginAndPassword(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException {
+        boolean checking = false;
         if (login.length() < 1 || login.length() > 20) {
-            try {
-                throw new WrongLoginException("Количество символов в логине неверное!");
-            } catch (WrongLoginException e) {
-                throw new RuntimeException(e);
-            }
+            throw new WrongLoginException("Количество символов в логине неверное!");
         }
         if (password.length() < 1 || password.length() > 20 || confirmPassword.length() < 1 || confirmPassword.length() > 20) {
-            try {
-                throw new WrongPasswordException("Количество символов в пароле или подтверждении пароля неверное.");
-            } catch (WrongPasswordException e) {
-                throw new RuntimeException(e);
-            }
+            throw new WrongPasswordException("Количество символов в пароле или подтверждении пароля неверное.");
         }
         if (checkString(login) && checkString(password) && password.equals(confirmPassword)) {
             checking = true;
             System.out.println("Логин, пароль и подтверждение пароля соответствуют всем требованиям.");
         } else {
             if (!checkString(login)) {
-                try {
-                    throw new WrongLoginException("В логине содержится запрещённый символ.");
-                } catch (WrongLoginException e) {
-                    throw new RuntimeException(e);
-                }
+                throw new WrongLoginException("В логине содержится запрещённый символ.");
             }
-            if (!checkString(password)) {
-                try {
-                    throw new WrongPasswordException("В пароле содержится запрещённый символ.");
-                } catch (WrongPasswordException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            if (!checkString(confirmPassword)) {
-                try {
-                    throw new WrongPasswordException("В подтверждении пароля содержится запрещённый символ.");
-                } catch (WrongPasswordException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            if (!password.equals(confirmPassword)) {
-                try {
-                    throw new WrongPasswordException("Символы в пароле и подтверждении пароля не совпадают.");
-                } catch (WrongPasswordException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
-            checking = false;
         }
+        if (!checkString(password)) {
+            throw new WrongPasswordException("В пароле содержится запрещённый символ.");
+        }
+        if (!checkString(confirmPassword)) {
+            ;
+            throw new WrongPasswordException("В подтверждении пароля содержится запрещённый символ.");
+        }
+        if (!password.equals(confirmPassword)) {
+            throw new WrongPasswordException("Символы в пароле и подтверждении пароля не совпадают.");
+        }
+
         return checking;
     }
 

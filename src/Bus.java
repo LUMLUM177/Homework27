@@ -16,7 +16,7 @@ public class Bus extends Cars {
 
     public boolean passVerification() {
         System.out.println("Автобус " + getBrand() + " " + getModel() + " в диагностике не требуется.");
-        return false;
+        return true;
     }
 
 

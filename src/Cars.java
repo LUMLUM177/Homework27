@@ -46,9 +46,7 @@ public abstract class Cars {
         }
     }
 
-    public boolean passVerification() {
-        return true;
-    }
+    public abstract boolean passVerification();
 
     @Override
     public String toString() {

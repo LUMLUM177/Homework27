@@ -22,7 +22,7 @@ public class Trucks extends Cars {
 
     public boolean passVerification() {
         if (isVerification() == false) {
-            throw new RuntimeException("Диагностика " + getBrand() + " " + getModel() + " не пройдена.");
+            throw new PassVerificationException("Диагностика " + getBrand() + " " + getModel() + " не пройдена.");
         } else {
             System.out.println("Диагностика " + getBrand() + " " + getModel() + " пройдена успешно.");
         }
